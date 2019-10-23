@@ -4,6 +4,8 @@ import requests as r
 import os
 import time
 
+with open("G:\\Code\\api_key.txt") as f:
+    api_key = f.read()
 
 curent_date = datetime.today().strftime("%Y-%m-%d_%H-%M")
 league_name = input("Enter your league username ")
@@ -15,7 +17,7 @@ def write_to_file(file_name, inputdata):
         json.dump(inputdata, f, indent=4)
 
 
-headers = {"Content-Type": "application/json","Application-Type": "application/json", "X-Riot-Token": "RGAPI-1506528b-8ec1-455f-8178-d73f719f6f32"}#
+headers = {"Content-Type": "application/json","Application-Type": "application/json", "X-Riot-Token": api_key}#
 url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/{}".format(league_name)
 try:
     user_data = r.get(url=url, headers=headers).json()
