@@ -44,7 +44,7 @@ except Exception as e:
 
 write_to_file("{}'s_MatchHistory_{}.json".format(league_name, curent_date), match_history)
 
-
+# List comprehension for getting game ids
 game_ids = [x["gameId"] for x in match_history["matches"]]
 os.makedirs("MatchHistory", exist_ok=True)
 for x in game_ids:
