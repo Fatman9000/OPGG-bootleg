@@ -61,30 +61,10 @@ for x in game_ids:
         time.sleep(2)
         participant_id = [x['participantId'] for x in match_info["participantIdentities"] if x['player']['summonerName'].lower() == league_name.lower() ]
         write_to_file("./{} Match History/{}_PlayerPerformance.json".format(league_name, x), match_info['participants'][participant_id[0]-1])
-        if match_info['participants'][participant_id[0]-1]['stats']['pentaKills'] > 0:
-            print("Penta Kill found in file {}_PlayerPerformance.json".format(x))
-        else:
-            print("No penta kill found")
+        # if match_info['participants'][participant_id[0]-1]['stats']['pentaKills'] > 0:
+        #     print("Penta Kill found in file {}_PlayerPerformance.json".format(x))
+        # else:
+        #     print("No penta kill found")
     except Exception as e:
         print("failed to pull user data: error: {}".format(e))
 
-
-
-# os.makedirs("MatchTimelines", exist_ok=True)
-# for x in game_ids:
-#     try:
-#         match_timeline = r.get("https://na1.api.riotgames.com/lol/match/v4/timelines/by-match/{}".format(x),headers=headers).json()
-#         write_to_file("./MatchTimelines/Match{}_MatchTimeline_{}.json".format(x, curent_date), match_timeline)
-#         time.sleep(2)
-#     except Exception as e:
-#         print("failed to pull user data: error: {}".format(e))
-
-
-
-# directory = "G:\Code\OPGG-bootleg\MatchHistory"
-# for matches in os.listdir(directory):
-#     with open(matches) as f:
-#         if match_history["participants"][]> 0:
-#             print("dab")
-#         else:
-#             print("sad")
