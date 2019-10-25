@@ -1,8 +1,9 @@
-from datetime import datetime
 import json
-import requests as r
 import os
 import time
+from datetime import datetime
+
+import requests as r
 
 with open("api_key.txt") as f:
     api_key = f.read()
@@ -71,3 +72,16 @@ for x in game_ids:
     except KeyboardInterrupt:
         print("User exited")
         break
+
+
+# Json parsing below here
+selected_id = input("Choose a game id that you want to view ")
+selected_stat = ""
+try:
+    while selected_stat != "exit":
+        with open("./{} Match History/{}_PlayerPerformance.json".format(league_name, selected_id)) as j:
+            json_file = json.load(j)
+            selected_stat = input("Choose a stat that you want to view ")
+            print(selected_stat, json_file["stats"][selected_stat])
+except FileNotFoundError:
+    print("file not found")
