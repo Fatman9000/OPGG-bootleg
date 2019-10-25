@@ -59,9 +59,9 @@ for x in game_ids:
        
         match_info = r.get("https://na1.api.riotgames.com/lol/match/v4/matches/{}".format(x),headers=headers).json()
         write_to_file("./{} Match History/{}_MatchInfo.json".format(league_name, x), match_info)
-        time.sleep(2)
         participant_id = [x['participantId'] for x in match_info["participantIdentities"] if x['player']['summonerName'].lower() == league_name.lower() ]
         write_to_file("./{} Match History/{}_PlayerPerformance.json".format(league_name, x), match_info['participants'][participant_id[0]-1])
+        time.sleep(2)
         # if match_info['participants'][participant_id[0]-1]['stats']['pentaKills'] > 0:
         #     print("Penta Kill found in file {}_PlayerPerformance.json".format(x))
         # else:
