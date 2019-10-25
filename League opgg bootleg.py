@@ -6,7 +6,7 @@ import time
 
 with open("api_key.txt") as f:
     api_key = f.read()
-
+print("Press Ctrl + c to exit")
 curent_date = datetime.today().strftime("%Y-%m-%d_%H-%M")
 league_name = input("Enter your league username ")
 headers = {"Content-Type": "application/json","Application-Type": "application/json", "X-Riot-Token": api_key}
@@ -56,6 +56,7 @@ for x in game_ids:
         continue
     print("Getting match {}".format(x))
     try:
+       
         match_info = r.get("https://na1.api.riotgames.com/lol/match/v4/matches/{}".format(x),headers=headers).json()
         write_to_file("./{} Match History/{}_MatchInfo.json".format(league_name, x), match_info)
         time.sleep(2)
@@ -67,4 +68,6 @@ for x in game_ids:
         #     print("No penta kill found")
     except Exception as e:
         print("failed to pull user data: error: {}".format(e))
-
+    except KeyboardInterrupt:
+        print("User exited")
+        break
