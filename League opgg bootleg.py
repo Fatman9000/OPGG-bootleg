@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 import pprint
 import requests as r
+
 while True:
     try:
         with open("api_key.txt") as f:
@@ -53,7 +54,7 @@ try:
 except Exception as e:
     print("failed to pull user data: error: {}".format(e))
 
-write_to_file("{}'s_MatchHistory_{}.json".format( 
+write_to_file("{}'s_MatchHistory_{}.json".format(
     league_name, curent_date), match_history)
 
 # List comprehension for getting game ids
@@ -72,7 +73,7 @@ if input("Would you like to get new matches y/n ") == "y":
             write_to_file(
                 "./{}_MatchHistory/{}_MatchInfo.json".format(league_name, x), match_info)
             participant_id = [x['participantId'] for x in match_info["participantIdentities"]
-                            if x['player']['summonerName'].lower() == league_name.lower()]
+                              if x['player']['summonerName'].lower() == league_name.lower()]
             write_to_file("./{}_MatchHistory/{}_PlayerPerformance.json".format(
                 league_name, x), match_info['participants'][participant_id[0]-1])
             time.sleep(2)
@@ -82,7 +83,7 @@ if input("Would you like to get new matches y/n ") == "y":
             print("User exited")
             break
 else:
-     for x in game_ids:
+    for x in game_ids:
         my_files = os.listdir(path="./{}_MatchHistory".format(league_name))
         if "{}_MatchInfo.json".format(x) in my_files:
             print("Already have match {}".format(x))
@@ -94,7 +95,7 @@ try:
         selected_id = input("Choose a game id that you want to view ")
         with open("./{}_MatchHistory/{}_PlayerPerformance.json".format(league_name, selected_id)) as j:
             json_file = json.load(j)
-            pprint.pprint(json_file["stats"], indent=4) 
+            pprint.pprint(json_file["stats"], indent=4)
             # selected_stat = input("Choose a stat that you want to view ")
             # print(selected_stat, json_file["stats"][selected_stat])
 except FileNotFoundError:
